@@ -154,25 +154,65 @@
       letter-spacing:3px;color:var(--text-secondary);
       text-transform:uppercase;margin-top:var(--sp-1);display:block;
     }
-    /* ═══ NAV ═══ */
-    .nav{display:flex;flex-direction:column;gap:2px;padding:var(--sp-2) var(--sp-2) 0}
-    .nav-btn{
-      display:flex;align-items:center;gap:var(--sp-2);
-      padding:var(--sp-3) var(--sp-3);border:1px solid transparent;
-      background:transparent;color:var(--text-secondary);
-      font-family:'Lora',serif;font-size:var(--fs-sm);
-      border-radius:7px;transition:var(--ease);text-align:left;
-      min-height:44px;
+    /* ═══ NAV (horizontal icon bar) ═══ */
+    .nav{
+      display:flex;gap:2px;padding:var(--sp-2) var(--sp-2) 0;
+      flex-wrap:wrap;justify-content:center;
     }
-    .nav-btn .icon{font-size:18px}
+    .nav-btn{
+      display:flex;flex-direction:column;align-items:center;gap:2px;
+      padding:6px 2px;border:1px solid transparent;
+      background:transparent;color:var(--text-secondary);
+      font-family:'Lora',serif;font-size:9px;letter-spacing:.3px;
+      border-radius:7px;transition:var(--ease);text-align:center;
+      min-width:44px;min-height:44px;flex:1;max-width:56px;
+      justify-content:center;
+    }
+    .nav-btn .icon{font-size:16px;flex-shrink:0}
     .nav-btn:hover{background:var(--accent-glow);color:var(--text-primary)}
     .nav-btn.active{background:var(--accent-glow);color:var(--accent);border-color:var(--accent-border)}
-    /* ═══ EDITION PICKERS ═══ */
-    .edition-block{padding:var(--sp-2) var(--sp-2) 0}
+    /* ═══ SETTINGS ACCORDION ═══ */
+    .settings-toggle{
+      display:flex;align-items:center;justify-content:space-between;
+      width:100%;padding:var(--sp-2) var(--sp-3);
+      background:none;border:none;border-top:1px solid var(--accent-border);
+      color:var(--text-secondary);font-family:'Cinzel',serif;
+      font-size:var(--fs-xs);letter-spacing:1.5px;text-transform:uppercase;
+      cursor:pointer;transition:var(--ease);
+    }
+    .settings-toggle:hover{color:var(--text-primary);background:var(--accent-glow)}
+    .settings-toggle .icon{transition:transform .25s ease;font-size:12px}
+    .settings-toggle.open .icon{transform:rotate(180deg)}
+    .settings-body{
+      max-height:0;overflow:hidden;padding:0 var(--sp-2);
+      transition:max-height .3s ease,padding .3s ease;
+    }
+    .settings-body.open{max-height:300px;padding:var(--sp-2)}
     .edition-label{
       display:block;font-size:var(--fs-xs);
       letter-spacing:1.5px;text-transform:uppercase;
       color:var(--text-secondary);margin-bottom:var(--sp-1);
+    }
+    /* ═══ SURAH FILTER ═══ */
+    .surah-filter-wrap{
+      padding:var(--sp-2) var(--sp-2) 0;
+      border-top:1px solid var(--accent-border);
+      position:sticky;top:0;z-index:2;
+      background:var(--bg-surface);
+    }
+    .surah-filter{
+      width:100%;background:var(--bg-card);
+      border:1px solid var(--accent-border);
+      color:var(--text-primary);font-family:'Lora',serif;
+      font-size:16px;padding:var(--sp-2) var(--sp-3);
+      border-radius:6px;outline:none;min-height:40px;
+      transition:var(--ease);
+    }
+    .surah-filter:focus{border-color:var(--accent)}
+    .surah-filter::placeholder{color:var(--text-secondary);font-size:var(--fs-xs)}
+    .surah-count{
+      font-size:var(--fs-xs);color:var(--text-secondary);
+      text-align:center;padding:var(--sp-1) 0;
     }
     .ed-select{
       width:100%;background:var(--bg-card);
@@ -188,25 +228,34 @@
     }
     .ed-select:focus{border-color:var(--accent)}
     /* ═══ SURAH LIST ═══ */
-    .surah-wrap{flex:1;overflow-y:auto;padding:var(--sp-2) var(--sp-2) 90px}
-    .surah-label-row{padding:var(--sp-1) var(--sp-2) var(--sp-1)}
+    .surah-wrap{flex:1;overflow-y:auto;padding:0 var(--sp-2) 90px}
     .surah-item{
       display:flex;align-items:center;gap:var(--sp-2);
-      padding:var(--sp-2) var(--sp-2);border-radius:7px;cursor:pointer;
-      transition:var(--ease);border:1px solid transparent;min-height:48px;
+      padding:7px var(--sp-2);border-radius:7px;cursor:pointer;
+      transition:var(--ease);border:1px solid transparent;
+      min-height:44px;
     }
     .surah-item:hover{background:var(--accent-glow);border-color:var(--accent-border)}
     .surah-item.active{background:var(--bg-active);border-color:var(--accent-strong)}
     .s-num{
-      width:28px;height:28px;border-radius:50%;
+      width:26px;height:26px;border-radius:6px;
       background:var(--accent-glow);border:1px solid var(--accent-border);
       display:flex;align-items:center;justify-content:center;
-      font-size:var(--fs-xs);color:var(--accent);font-family:'Cinzel',serif;flex-shrink:0;
+      font-size:10px;color:var(--accent);font-family:'Cinzel',serif;flex-shrink:0;
     }
     .s-info{flex:1;min-width:0}
+    .s-row{display:flex;align-items:baseline;gap:var(--sp-1)}
     .s-name-en{font-size:var(--fs-sm);color:var(--text-primary);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .s-meta{font-size:var(--fs-xs);color:var(--text-secondary);margin-top:1px}
-    .s-name-ar{font-family:'Amiri',serif;font-size:15px;color:var(--accent);flex-shrink:0}
+    .s-name-ar{font-family:'Amiri',serif;font-size:13px;color:var(--accent);flex-shrink:0;margin-left:auto}
+    .s-meta{font-size:10px;color:var(--text-secondary);margin-top:1px;display:flex;gap:var(--sp-1);align-items:center}
+    .s-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+    .s-dot-mak{background:#fbbf24}
+    .s-dot-mad{background:#4ade80}
+    .s-ayahs{opacity:.7}
+    .s-no-match{
+      text-align:center;padding:var(--sp-4);
+      color:var(--text-secondary);font-size:var(--fs-sm);
+    }
     /* ═══ MAIN ═══ */
     .main{flex:1;overflow:hidden;display:flex;flex-direction:column}
     .topbar{
@@ -555,7 +604,7 @@
     }
     /* ═══ RESPONSIVE: xl (1280px) ═══ */
     @media(min-width:1280px){
-      :root{--sidebar-w:300px}
+      :root{--sidebar-w:320px}
       .content{padding:var(--sp-8) calc(var(--sp-8) + 8px) 110px}
     }
   </style>
@@ -650,23 +699,27 @@
         <svg class="icon" aria-hidden="true"><use href="#i-home"/></svg> Home
       </button>
       <button class="nav-btn" data-view="search">
-        <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg> Search Verses
+        <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg> Search
       </button>
       <button class="nav-btn" data-view="sajda">
-        <svg class="icon" aria-hidden="true"><use href="#i-dome"/></svg> Sajda Verses
+        <svg class="icon" aria-hidden="true"><use href="#i-dome"/></svg> Sajda
       </button>
       <button class="nav-btn" data-view="juz">
-        <svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg> Browse by Juz
+        <svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg> Juz
       </button>
       <button class="nav-btn" data-view="page">
-        <svg class="icon" aria-hidden="true"><use href="#i-file"/></svg> Browse by Page
+        <svg class="icon" aria-hidden="true"><use href="#i-file"/></svg> Page
       </button>
       <button class="nav-btn" data-view="ayah">
-        <svg class="icon" aria-hidden="true"><use href="#i-hash"/></svg> Single Ayah
+        <svg class="icon" aria-hidden="true"><use href="#i-hash"/></svg> Ayah
       </button>
     </nav>
 
-    <div class="edition-block">
+    <button class="settings-toggle" id="settingsToggle" aria-expanded="false" aria-controls="settingsBody">
+      <span>Settings</span>
+      <svg class="icon" aria-hidden="true"><use href="#i-arrow-down"/></svg>
+    </button>
+    <div class="settings-body" id="settingsBody">
       <label class="edition-label" for="textEd">Text / Translation</label>
       <select class="ed-select" id="textEd">
         <option value="quran-uthmani">Arabic — Uthmani Script</option>
@@ -690,8 +743,9 @@
       </select>
     </div>
 
-    <div class="surah-label-row">
-      <span class="edition-label" style="padding:var(--sp-2) 0 var(--sp-1);display:block">Surahs</span>
+    <div class="surah-filter-wrap">
+      <input class="surah-filter" id="surahFilter" type="text" placeholder="Filter surahs… name or number" aria-label="Filter surahs">
+      <div class="surah-count" id="surahCount"></div>
     </div>
     <div class="surah-wrap" id="surahWrap" role="list" aria-label="Surah list">
       <div class="st-msg"><div class="spinner" role="status"><span class="sr-only">Loading surahs</span></div></div>
@@ -874,6 +928,38 @@ hamburger.onclick = function() {
 backdrop.onclick = closeSidebar;
 $('sidebarClose').onclick = closeSidebar;
 
+/* ── SETTINGS ACCORDION ── */
+var settingsToggle = $('settingsToggle');
+var settingsBody = $('settingsBody');
+settingsToggle.onclick = function() {
+  var isOpen = settingsBody.classList.toggle('open');
+  settingsToggle.classList.toggle('open', isOpen);
+  settingsToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+};
+
+/* ── SURAH FILTER ── */
+var surahFilter = $('surahFilter');
+var surahCount = $('surahCount');
+surahFilter.addEventListener('input', function() {
+  var q = surahFilter.value.trim().toLowerCase();
+  filterSurahs(q);
+});
+
+function filterSurahs(q) {
+  if (!S.surahs.length) return;
+  var filtered = S.surahs;
+  if (q) {
+    filtered = S.surahs.filter(function(s) {
+      return s.englishName.toLowerCase().indexOf(q) !== -1
+        || s.name.indexOf(q) !== -1
+        || s.englishNameTranslation.toLowerCase().indexOf(q) !== -1
+        || String(s.number) === q;
+    });
+  }
+  renderSurahList(filtered);
+  surahCount.textContent = filtered.length + ' of 114';
+}
+
 /* ── THEME ── */
 function setTheme(t) {
   document.documentElement.dataset.theme = t;
@@ -987,20 +1073,25 @@ async function loadSurahList() {
     var data = await api('/surah');
     S.surahs = data;
     renderSurahList(data);
+    surahCount.textContent = data.length + ' of 114';
   } catch(e) { errMsg(surahWrap, 'Could not load Surahs'); }
 }
 function renderSurahList(surahs) {
+  if (!surahs.length) {
+    surahWrap.innerHTML = '<div class="s-no-match">No surahs found</div>';
+    return;
+  }
   surahWrap.innerHTML = surahs.map(function(s) {
+    var dotCls = s.revelationType === 'Meccan' ? 's-dot-mak' : 's-dot-mad';
     return '<div class="surah-item' + (S.currentSurah === s.number ? ' active' : '') + '" ' +
       'onclick="loadSurah(' + s.number + ')" role="listitem" tabindex="0" ' +
       'onkeydown="if(event.key===\'Enter\')loadSurah(' + s.number + ')" ' +
       'aria-label="Surah ' + s.number + ' ' + s.englishName + '">' +
       '<div class="s-num">' + s.number + '</div>' +
       '<div class="s-info">' +
-        '<div class="s-name-en">' + s.englishName + '</div>' +
-        '<div class="s-meta">' + s.englishNameTranslation + ' · ' + s.numberOfAyahs + ' ayahs</div>' +
+        '<div class="s-row"><span class="s-name-en">' + s.englishName + '</span><span class="s-name-ar" lang="ar">' + s.name + '</span></div>' +
+        '<div class="s-meta"><span class="s-dot ' + dotCls + '"></span>' + s.revelationType + ' <span class="s-ayahs">' + s.numberOfAyahs + ' ayahs</span></div>' +
       '</div>' +
-      '<div class="s-name-ar" lang="ar">' + s.name + '</div>' +
     '</div>';
   }).join('');
 }
