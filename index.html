@@ -123,10 +123,12 @@
       width:var(--sidebar-w);
       background:var(--bg-surface);
       border-right:1px solid var(--accent-border);
-      display:flex;flex-direction:column;overflow:hidden;
+      display:flex;flex-direction:column;
+      overflow-x:hidden;overflow-y:auto;
       transform:translateX(-100%);
       transition:transform var(--ease-slow),background-color var(--ease-slow);
       z-index:100;
+      -webkit-overflow-scrolling:touch;
     }
     .sidebar.open{transform:translateX(0)}
     .sidebar-head{
@@ -176,10 +178,13 @@
       width:100%;background:var(--bg-card);
       border:1px solid var(--accent-border);
       color:var(--text-primary);font-family:'Lora',serif;
-      font-size:16px;padding:var(--sp-2) var(--sp-2);
+      font-size:16px;padding:var(--sp-2) var(--sp-8) var(--sp-2) var(--sp-2);
       border-radius:6px;cursor:pointer;outline:none;
-      appearance:none;margin-bottom:var(--sp-2);
+      appearance:none;-webkit-appearance:none;margin-bottom:var(--sp-2);
       min-height:44px;transition:var(--ease);
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239a8e7a' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat:no-repeat;
+      background-position:right 10px center;
     }
     .ed-select:focus{border-color:var(--accent)}
     /* ═══ SURAH LIST ═══ */
@@ -580,9 +585,9 @@
 </svg>
 <!-- ═══ ACCESSIBILITY ═══ -->
 <a href="#content" class="skip-link">Skip to content</a>
-<div class="backdrop" id="backdrop" aria-hidden="true"></div>
 
 <div class="app">
+  <div class="backdrop" id="backdrop" aria-hidden="true"></div>
   <!-- ══ SIDEBAR ══ -->
   <aside class="sidebar" id="sidebar" aria-label="Main navigation">
     <div class="sidebar-head">
